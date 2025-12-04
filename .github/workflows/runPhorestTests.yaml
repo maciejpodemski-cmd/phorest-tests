@@ -37,15 +37,16 @@ jobs:
           source .venv/bin/activate
           rm -rf results || true
           mkdir -p results
-          robot -d results "$ROBOT_TESTS_PATH" \
-            -v PHOREST_MAIN_PAGE:"${{ vars.PHOREST_MAIN_PAGE }}" \
-            -v CREDIT_CARD_NUMBER:"${{ secrets.CREDIT_CARD_NUMBER }}" \
-            -v CREDIT_CARD_EXPIRY:"${{ secrets.CREDIT_CARD_EXPIRY }}" \
-            -v CVC:"${{ secrets.CVC }}" \
-            -v MAILOSAUR_API_KEY:"${{ secrets.MAILOSAUR_API_KEY }}" \
-            -v MAILOSAUR_SERVER_ID:"${{ secrets.MAILOSAUR_SERVER_ID }}" \
-            -v RECEIPT_MAIL_SUBJECT:"${{ vars.RECEIPT_MAIL_SUBJECT }}" \
-
+          robot \
+              -d results \
+              -v PHOREST_MAIN_PAGE:'${{ vars.PHOREST_MAIN_PAGE }}' \
+              -v CREDIT_CARD_NUMBER:'${{ secrets.CREDIT_CARD_NUMBER }}' \
+              -v CREDIT_CARD_EXPIRY:'${{ secrets.CREDIT_CARD_EXPIRY }}' \
+              -v CVC:'${{ secrets.CVC }}' \
+              -v MAILOSAUR_API_KEY:'${{ secrets.MAILOSAUR_API_KEY }}' \
+              -v MAILOSAUR_SERVER_ID:'${{ secrets.MAILOSAUR_SERVER_ID }}' \
+              -v RECEIPT_MAIL_SUBJECT:'${{ vars.RECEIPT_MAIL_SUBJECT }}' \
+              "${ROBOT_TESTS_PATH}"
       - name: Upload Robot Framework reports
         if: always()
         uses: actions/upload-artifact@v4
