@@ -7,17 +7,15 @@ ${header_name}                           //p[@data-target='page.businessNameHead
 ${header_txt}                            //span[@data-target='page.headerText']
 ${other_option_radio}                    //input[@data-target='amount.otherOptionButton']
 ${other_value_input}                     //input[@type='number' and @data-target='amount.otherInput']
-${required_field_error_msg}              //div[@data-target='email.purchaserEmailError']    #duplicate1
+${invalid_buyer_email_error_msg}         //div[@data-target='email.purchaserEmailError']
 ${purchaser_email_input}                 //input[@data-target='email.purchaserEmailInput']
 ${first_name_input}                      //input[@data-target='name.purchaserFirstNameInput']
 ${last_name_input}                       //input[@data-target='name.purchaserLastNameInput']
 ${send_to_me_tab}                        //a[@data-action='tabs#showSendToMe' and @data-target='tabs.sendToMyselfTab']
 ${send_to_someone_else_tab}              //a[@data-target='tabs.sendToOtherTab']
-# ${invalid_email_format_error_msg}        //div[@data-target='email.purchaserEmailError']    #duplicate1
 ${recipient_email_input}                 //input[@data-target='email.recipientEmailInput']
 ${recipient_email_msg_input}             //textarea[@data-target='email.recipientMessageInput']
-${invalid_recipient_email_error_msg}     //div[@data-target='email.recipientEmailError']    #duplicate2
-# ${recipient_invalid_email_format_error}  //div[@data-target='email.recipientEmailError']     #duplicate2
+${invalid_recipient_email_error_msg}     //div[@data-target='email.recipientEmailError']
 ${checkout_button}                       //button[@data-target="checkout.checkoutButton"]
 ${other_input_error_msg}                 //p[@data-target="amount.otherSectionError"]
 ${plus_free_value_other}                 //span[@data-target="amount.otherDiscountInfo"]
@@ -35,13 +33,15 @@ Assert Header Name And Text
 Select Voucher Amount
     [Documentation]    Select a voucher amount option by its value
     [Arguments]    ${amount}
-    ${locator}=    Set Variable    xpath=//input[@data-target='amount.optionButton' and @data-display-amount='${amount}']
+
+    ${locator}=    Catenate    SEPARATOR=    //li[@data-value="${amount}"]
     Wait Until Element Is Visible    ${locator}    10s
     Click Element    ${locator}
 
 Select And Type Other Voucher Value
     [Documentation]    Select the 'Other' option for voucher amount
     [Arguments]    ${other_value}
+
     Wait Until Element Is Visible    ${other_option_radio}    10s
     Click Element    ${other_option_radio}
     Wait Until Element Is Visible    ${other_value_input}    10s
@@ -53,7 +53,7 @@ Check Required Field Error Message
     [Arguments]    ${input_type}    ${expected_error_msg}
     
     IF    '${input_type}' == 'Purchaser Email Input'
-        ${actual_error_msg}=    Get Locator Text    ${invalid_email_format_error_msg}
+        ${actual_error_msg}=    Get Locator Text    ${invalid_buyer_email_error_msg}
         Should Be Equal    ${actual_error_msg}    ${expected_error_msg}
     ELSE IF   '${input_type}' == 'Recipien Email Input'
         ${actual_error_msg}=    Get Locator Text    ${invalid_recipient_email_error_msg}

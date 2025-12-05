@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation       Complete page elements and keywords
+Documentation       Complete page elements and keywords for the success payment page
 Library             SeleniumLibrary
 Resource            ../Utilities/Common.resource
 *** Variables ***

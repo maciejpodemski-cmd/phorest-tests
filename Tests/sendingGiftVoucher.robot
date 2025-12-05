@@ -28,8 +28,8 @@ Test Teardown      Close All Browsers
     Assert Purchase Details   $250.00   $0.00    $250.00    ${buyer_email}    ${buyer_email} 
     Confirm Summary
     Assert Purchase Details    $250.00   $0.00    $250.00    ${buyer_email}    ${buyer_email}
-    Enter Card Number    ${CREDIT_CARD_NUMBER}    ${CREDIT_CARD_EXPIRY}    ${CVC}
-    Wait Until Page Contains Element    ${success_page}    20s
+    Enter Card Number And Submit Payment    ${CREDIT_CARD_NUMBER}    ${CREDIT_CARD_EXPIRY}    ${CVC}
+    Wait Until Page Contains Element    ${success_page}    30s
     ${num}=    Get Voucher Number
     ${message}    Check Receipt Email Received To Recipient    ${buyer_email}    You've been sent a $250.00 gift voucher for Demo US!
     Check Email Contains Voucher Number    ${message}    ${num}
@@ -52,7 +52,7 @@ Test Teardown      Close All Browsers
     Assert Purchase Details   $300.00   $0.00    $300.00    ${buyer_email}    ${recpient_email}
     Confirm Summary
     Assert Purchase Details    $300.00   $0.00    $300.00    ${buyer_email}    ${recpient_email}
-    Enter Card Number    ${CREDIT_CARD_NUMBER}    ${CREDIT_CARD_EXPIRY}    ${CVC}
+    Enter Card Number And Submit Payment    ${CREDIT_CARD_NUMBER}    ${CREDIT_CARD_EXPIRY}    ${CVC}
     Wait Until Page Contains Element    ${success_page}    20s
     ${num}=    Get Voucher Number
     ${message}    Check Receipt Email Received To Recipient    ${recpient_email}    You've been sent a $300.00 gift voucher for Demo US!
@@ -71,7 +71,7 @@ Test Teardown      Close All Browsers
     Assert Purchase Details   $175.00   $0.00    $175.00    ${buyer_email}    ${buyer_email} 
     Confirm Summary
     Assert Purchase Details    $175.00   $0.00    $175.00    ${buyer_email}    ${buyer_email}
-    Enter Card Number    ${CREDIT_CARD_NUMBER}    ${CREDIT_CARD_EXPIRY}    ${CVC}
+    Enter Card Number And Submit Payment    ${CREDIT_CARD_NUMBER}    ${CREDIT_CARD_EXPIRY}    ${CVC}
     Wait Until Page Contains Element    ${success_page}    20s
     ${num}=    Get Voucher Number
     ${message}    Check Receipt Email Received To Recipient    ${buyer_email}    You've been sent a $175.00 gift voucher for Demo US!
@@ -94,7 +94,7 @@ Test Teardown      Close All Browsers
     Assert Purchase Details   $225.00   $0.00    $225.00    ${buyer_email}    ${recpient_email}
     Confirm Summary
     Assert Purchase Details    $225.00   $0.00    $225.00    ${buyer_email}    ${recpient_email}
-    Enter Card Number    ${CREDIT_CARD_NUMBER}    ${CREDIT_CARD_EXPIRY}    ${CVC}
+    Enter Card Number And Submit Payment    ${CREDIT_CARD_NUMBER}    ${CREDIT_CARD_EXPIRY}    ${CVC}
     Wait Until Page Contains Element    ${success_page}    20s
     ${num}=    Get Voucher Number
     ${message}    Check Receipt Email Received To Recipient    ${recpient_email}    You've been sent a $225.00 gift voucher for Demo US!
