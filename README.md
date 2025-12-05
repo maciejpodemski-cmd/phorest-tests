@@ -23,7 +23,7 @@ Utilities/
 requirements.txt
 results/        # directory for test reports (created/overwritten when tests run)
 
-Prerequisites
+## Prerequisites
 
 To run the tests locally you need:
 
