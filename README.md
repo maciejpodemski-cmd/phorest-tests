@@ -23,7 +23,7 @@ A Mailosaur account
 
 API key and server ID configured in the project (see Configuration section)
 
-## Instalation
+## Installation
 Clone the repository:
 git clone <your_repository_url>
 cd phorest-tests
