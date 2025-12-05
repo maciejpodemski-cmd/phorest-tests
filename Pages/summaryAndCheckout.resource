@@ -27,12 +27,13 @@ Confirm Summary
     Execute Javascript    document.evaluate("//button[@data-action='confirm#confirmAction']", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollIntoView(true);
     Wait Until Element Is Visible    ${confirm_button}    10s
     Click Element    ${confirm_button}
+    Wait Until Element Is Visible    ${voucher_value}    60s
     
 Assert Purchase Details
     [Documentation]    Assert the summary details on the summary page
     [Arguments]    ${expected_voucher_value}    ${expected_processing_fee}    ${expected_total_cost}    
     ...    ${expected_purchaser_email}    ${expected_recipient_email}
-    Wait Until Element Is Visible    ${voucher_value}    30s
+    Wait Until Element Is Visible    ${voucher_value}    10s
     
     ${actual_voucher_value}=    Get Locator Text    ${voucher_value}
     ${actual_processing_fee}=    Get Locator Text    ${processing_fee_value}
