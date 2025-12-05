@@ -50,8 +50,7 @@ environment settings
 Mailosaur server ID 
 
 Before running the tests, make sure that the values in vars.resource match your target test environment.
-
-Running Tests Locally
+## Running Tests Locally
 1. Run the main UI scenarios
 
 To run the main gift voucher test suite:
