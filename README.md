@@ -36,9 +36,7 @@ source .venv/bin/activate
 
 # Windows (PowerShell / CMD):
 .venv\Scripts\activate
-
-Install dependencies:
-python -m pip install --upgrade pip
+# Install dependencies:
 pip install -r requirements.txt
 
 ## Configuration
@@ -63,7 +61,7 @@ robot -d results Tests/sendingGiftVoucher.robot
 
 Tests/sendingGiftVoucher.robot is the UI test suite.
 
-2. Run all tests in the Tests directory
+2. Run all tests in the Tests directory:
 robot -d results Tests
 
 This repository is integrated with GitHub Actions using a workflow such as:.github/workflows/runPhorestTests.yaml
