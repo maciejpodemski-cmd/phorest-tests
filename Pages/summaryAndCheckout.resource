@@ -74,6 +74,7 @@ Enter Card Number And Submit Payment
     Input Text    ${credit_card_expiry_input}    ${expiry}
     Input Text    ${cvc_input}   ${cvc}
     Unselect Frame
-    Scroll Element Into View    ${submit_button}
+    Execute Javascript    document.evaluate("//button[@data-action='stripe-purchase#confirmPayment']", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollIntoView(true);
+    # Scroll Element Into View    ${submit_button}
     Wait Until Element Is Visible    ${submit_button}    10s
     Click Button    Submit
