@@ -71,7 +71,7 @@ Enter Card Number And Submit Payment
     ...    ${credt_card_number_input}
     ...    10s
     # ${el}=    Get WebElement    ${credt_card_number_input}
-    Click Element    ${credt_card_number_input}
+    # Click Element    ${credt_card_number_input}
     Input Text    ${credt_card_number_input}    ${card_number}
     Input Text    ${credit_card_expiry_input}    ${expiry}
     Input Text    ${cvc_input}   ${cvc}
