@@ -17,17 +17,17 @@ class MailosaurLibrary:
             )
         self.client = MailosaurClient(api_key)
 
-    # ---------- Adresy e-mail ----------
+    # ---------- Email Addresses ----------
     @keyword(name="Generate Email Address")
     def generate_email_address(self, server_id):
-        """Zwraca losowy adres e-mail dla podanego server_id.
+        """Returns a random email address for the given server_id.
 
-        Wykorzystuje mailosaur.servers.generate_email_address(server_id),
-        np. 'bgwqj@SERVER_ID.mailosaur.net'.
+        Uses mailosaur.servers.generate_email_address(server_id),
+        e.g. 'bgwqj@SERVER_ID.mailosaur.net'.
         """
         return self.client.servers.generate_email_address(server_id)
 
-    # ---------- Odbieranie wiadomości ----------
+    # ---------- Receiving Messages ----------
     @keyword(name="Wait For Message With Subject")
     def wait_for_message_with_subject(
         self,
@@ -36,7 +36,7 @@ class MailosaurLibrary:
         timeout_ms=120000,
         sent_to=None,
     ):
-        """Czeka na maila o danym tytule (i opcjonalnie wysłanego na konkretny adres)."""
+        """Waits for an email with the given subject (optionally sent to a specific address)."""
         criteria = SearchCriteria()
         criteria.subject = subject
         if sent_to:
@@ -49,54 +49,54 @@ class MailosaurLibrary:
         )
         return message
 
-    # ---------- Kasowanie wiadomości ----------
+    # ---------- Deleting Messages ----------
     @keyword(name="Delete Message")
     def delete_message(self, message_or_id):
-        """Usuwa pojedynczą wiadomość (obiekt Message lub string z id)."""
+        """Deletes a single message (Message object or string with id)."""
         message_id = getattr(message_or_id, "id", message_or_id)
         self.client.messages.delete(message_id)
 
     @keyword(name="Delete All Messages")
     def delete_all_messages(self, server_id):
-        """Czyści cały inbox (server). Operacja nieodwracalna."""
+        """Clears the entire inbox (server). Irreversible operation."""
         self.client.messages.delete_all(server_id)
 
-    # ---------- Proste helpery do asercji ----------
+    # ---------- Assertions helpers ----------
     @keyword(name="Get Text Body")
     def get_text_body(self, message):
-        """Zwraca plaintext body wiadomości (lub pusty string)."""
+        """Returns the plaintext body of the message (or an empty string)."""
         if message.text:
             return message.text.body
         return ""
     @keyword(name="Get HTML Body")
     def get_html_body(self, message):
-        """Zwraca HTML body wiadomości (lub pusty string)."""
+        """Returns the HTML body of the message (or an empty string)."""
         if message.html:
             return message.html.body
         return ""
     
     @keyword(name="Get Subject")
     def get_subject(self, message):
-        """Zwraca temat wiadomości."""
+        """Returns the subject of the message."""
         return message.subject
     
     @keyword(name="Email Body Should Contain")
     def email_body_should_contain(self, message, expected_text):
-        """Sprawdza, że treść maila zawiera podany fragment."""
+        """Checks that the email body contains the given text fragment."""
         body = None
 
-        # 1) Preferuj tekst jeśli jest
+        # 1) Prefer text if available
         if getattr(message, "text", None) and getattr(message.text, "body", None):
             body = message.text.body
-        # 2) W przeciwnym razie użyj HTML
+        # 2) Otherwise use HTML
         elif getattr(message, "html", None) and getattr(message.html, "body", None):
             body = message.html.body
         else:
-            raise AssertionError("Email nie ma ani text.body, ani html.body – nie ma czego sprawdzić.")
+            raise AssertionError("Email has neither text.body nor html.body – nothing to check.")
 
         if expected_text not in body:
             raise AssertionError(
-                f"Nie znaleziono oczekiwanej treści w mailu.\n"
-                f"Szukane: '{expected_text}'\n\n"
+                f"Text not found in email body.\n"
+                f"Searched for: '{expected_text}'\n\n"
                 f"Body:\n{body}"
             )
